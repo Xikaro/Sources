@@ -1,0 +1,31 @@
+name: Deploy modpack
+on:
+  push:
+    tags:
+      - 'R*-Normal'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get the version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION::$(echo ${GITHUB_REF} | sed -e 's#refs/tags/##g' | awk -F'-' '{print $1}')
+
+      - name: Set the version
+        run: |
+          MODPACKVERSION=${{ steps.get_version.outputs.VERSION }}
+          echo "TFG New Horizons-${MODPACKVERSION}-Normal" > ./overrides/version.txt
+          sed -i -e "s/MODPACKVERSION/${MODPACKVERSION}/g" manifest.json
+
+      - name: Archive Release Client
+        uses: TheDoctor0/zip-release@0.6.2
+        with:
+          ref: Deploy-modpack
+        type: 'zip'
+        filename: ${{ github.workspace }}/release.zip
+        exclusions: '*.git* LICENSE *.md */.github/* GT_ID_USAGE.txt SCRIPT_PRIORITY.txt'

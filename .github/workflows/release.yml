@@ -8,6 +8,6 @@ jobs:
     - name: Archive Release
       uses: thedoctor0/zip-release@main
       with:
-        type: zip
-        filename: 'release.zip'
+        type: tar.gz
+        filename: 'release.tar.gz'
         exclusions: '*.git* /*node_modules/* .editorconfig'

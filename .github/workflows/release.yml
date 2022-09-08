@@ -9,5 +9,5 @@ jobs:
       uses: thedoctor0/zip-release@main
       with:
         type: tar.gz
-        filename: 'release.tar.gz'
+        path: ./
         exclusions: '*.git* /*node_modules/* .editorconfig'

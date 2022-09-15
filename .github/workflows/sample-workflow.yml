@@ -16,7 +16,7 @@ jobs:
         RELEASE: ${{ github.event.release.name }}
         TAG: ${{ github.event.release.tag_name }}
     - name: "Crosspost changelog to Discord"
-      uses: kludge-cs/gitcord-release-changelogger
+      uses: kludge-cs/gitcord-release-changelogger@v2.0.0
       with:
         release-body: ${{ github.event.release.body }}
         release-name: ${{ steps.get-release-name.outputs.name }}

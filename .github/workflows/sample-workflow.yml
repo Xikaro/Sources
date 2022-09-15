@@ -20,4 +20,4 @@ jobs:
       with:
         release-body: ${{ github.event.release.body }}
         release-name: ${{ steps.get-release-name.outputs.name }}
-        webhook-webhook: ${{ secrets.DISCORD_RELEASE }}
+        discord-webhook: ${{ secrets.DISCORD_RELEASE }}
